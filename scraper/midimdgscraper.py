@@ -8,7 +8,9 @@ soup = BeautifulSoup(r.text, 'html.parser')
 def getHotNews(): 
     articles = soup.find_all(class_='td-module-container')
     result = []
+    i = 0
     for article in articles:
+        i+=1
         article_soup = BeautifulSoup(str(article), 'html.parser')
         title = article_soup.find('h3').text
         link = article_soup.find('a').attrs['href']
@@ -23,9 +25,11 @@ def getHotNews():
             pass
         if img_soup == None:
             img = 'no_image'
+            continue
         else:
             img = img_soup.attrs['data-img-url']
         result.append({
+            'id': 'midi' + str(i),
             'journalId': 1,
             'journal': 'Midi Madagasikara',
             'title': title,

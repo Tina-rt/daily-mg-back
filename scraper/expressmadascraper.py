@@ -7,8 +7,10 @@ soup = BeautifulSoup(r.text, 'html.parser')
 def getHotNews() -> list:
     articles = soup.find_all('article')
     result = []
+    i = 0
     # print(articles)
     for article in articles:
+        i+=1
         article_soup = BeautifulSoup(str(article), 'html.parser')
         try:
             title = article.a.attrs['title']
@@ -19,6 +21,7 @@ def getHotNews() -> list:
             if date_soup != None: date = date_soup.attrs['datetime'] 
             detail = article_soup.find('p').text
             result.append({
+                'id': 'lexpress' + str(i),
                 'journal': 'L\'Express de Madagascar',
                 'journalId': 0,
                 'title': title,
