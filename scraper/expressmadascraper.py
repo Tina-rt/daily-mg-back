@@ -14,6 +14,9 @@ def getHotNews() -> list:
             title = article.a.attrs['title']
             link = article.a.attrs['href']
             img = article_soup.find(class_='entry-image').attrs['data-image']
+            date_soup = article_soup.find('time')
+            date = ''
+            if date_soup != None: date = date_soup.attrs['datetime'] 
             detail = article_soup.find('p').text
             result.append({
                 'journal': 'L\'Express de Madagascar',
@@ -21,7 +24,8 @@ def getHotNews() -> list:
                 'title': title,
                 'link': link,
                 'img': img,
-                'detail': detail
+                'detail': detail,
+                'date': date
             })
         except: 
             pass
