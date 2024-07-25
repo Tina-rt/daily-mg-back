@@ -12,6 +12,10 @@ def getHotNews():
         article_soup = BeautifulSoup(str(article), 'html.parser')
         title = article_soup.find('h3').text
         link = article_soup.find('a').attrs['href']
+        date = ''
+        date_soup = article_soup.find('time')
+        if date_soup != None:
+            date = date_soup.attrs['datetime']
         try:
 
             img_soup = article_soup.select_one('span[data-type="css_image"]')
@@ -26,7 +30,8 @@ def getHotNews():
             'journal': 'Midi Madagasikara',
             'title': title,
             'link': link,
-            'img': img
+            'img': img,
+            'date': date
         })
     return result
 
