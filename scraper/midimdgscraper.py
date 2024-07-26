@@ -2,10 +2,10 @@ from bs4 import BeautifulSoup
 import requests
 
 JOURNAL_URL = 'https://midi-madagasikara.mg/'
-r = requests.get(JOURNAL_URL)
-soup = BeautifulSoup(r.text, 'html.parser')
 
 def getHotNews(): 
+    r = requests.get(JOURNAL_URL)
+    soup = BeautifulSoup(r.text, 'html.parser')
     articles = soup.find_all(class_='td-module-container')
     result = []
     i = 0

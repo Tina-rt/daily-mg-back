@@ -2,9 +2,9 @@ from bs4 import BeautifulSoup
 import requests
 
 JOURNAL_URL = 'https://www.lexpress.mg/'
-r = requests.get(JOURNAL_URL)
-soup = BeautifulSoup(r.text, 'html.parser')
 def getHotNews() -> list:
+    r = requests.get(JOURNAL_URL)
+    soup = BeautifulSoup(r.text, 'html.parser')
     articles = soup.find_all('article')
     result = []
     i = 0
