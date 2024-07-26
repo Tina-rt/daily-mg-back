@@ -44,7 +44,8 @@ def getDetail(link):
         return None
     article_paragraph_list = article_content.find_all('p')
    
-    article_img = article_content.find('img').attrs['src']
+    try:article_img = article_content.find('img').attrs['src']
+    except: article_img = 'no_image'
 
     date_ = article_content.find('time').attrs['datetime']
     content = [p.text for p in article_paragraph_list]
