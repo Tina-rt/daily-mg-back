@@ -47,12 +47,12 @@ def getDetail(link):
     article_content = soupDetail.find(class_='td_block_wrap tdb_single_content tdi_68 td-pb-border-top td_block_template_1 td-post-content tagdiv-type')
     all_paragraph = article_content.find_all('p')
 
-    content = '\n\n'.join([p.text for p in all_paragraph])
+    
 
-    img_url = soupDetail.find('img').attrs['src']
+    img_url = article_content.find('img').attrs['src']
     
     return {
         'date': date,
-        'content': content,
+        'content': [p.text for p in all_paragraph],
         'img': img_url
     }

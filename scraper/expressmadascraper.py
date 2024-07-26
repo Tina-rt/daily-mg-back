@@ -43,12 +43,13 @@ def getDetail(link):
     if article_content == None:
         return None
     article_paragraph_list = article_content.find_all('p')
-    article_paragraph = '\n\n'.join([p.text for p in article_paragraph_list])
-    article_img = soupDetail.find('img').attrs['src']
+   
+    article_img = article_content.find('img').attrs['src']
 
-    date_ = soupDetail.find('time').attrs['datetime']
+    date_ = article_content.find('time').attrs['datetime']
+    content = [p.text for p in article_paragraph_list]
     return {
-        'content': article_paragraph,
+        'content': content,
         'img': article_img,
         'date': date_
     }
