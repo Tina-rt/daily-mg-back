@@ -1,6 +1,7 @@
 from flask_restful import Resource
-from scraper import midimdgscraper, expressmadascraper, lemondescraper
+from scraper import midimdgscraper, expressmadascraper, lemondescraper, lefigaroscraper
 from flask import request
+from api.constants import JOURNAL_LIST
 
 class HotNews(Resource):
     def get(self):
@@ -11,16 +12,11 @@ class DetailJournal(Resource):
         link_param = request.args.get('link')
         journal_id = request.args.get('journal_id')
         try:
-            if journal_id == '1':
-                return midimdgscraper.getDetail(link_param)
-            elif journal_id == '0':
-                return expressmadascraper.getDetail(link_param)
-            else:
-                return {}
+            return JOURNAL_LIST[journal_id].getDetail(link_param)
         except: 
             return {}
 
 
 class InternationalNews(Resource):
     def get(self):
-        return lemondescraper.getHotNews()
+        return lefigaroscraper.getHotNews()
