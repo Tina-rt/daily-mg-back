@@ -1,5 +1,5 @@
 from flask_restful import Resource
-from scraper import midimdgscraper, expressmadascraper
+from scraper import midimdgscraper, expressmadascraper, lemondescraper
 from flask import request
 
 class HotNews(Resource):
@@ -19,3 +19,8 @@ class DetailJournal(Resource):
                 return {}
         except: 
             return {}
+
+
+class InternationalNews(Resource):
+    def get(self):
+        return lemondescraper.getHotNews()

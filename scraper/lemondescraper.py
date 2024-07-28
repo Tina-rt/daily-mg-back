@@ -14,8 +14,8 @@ def getHotNews():
         link = article.attrs['href']
         img_soup = article_soup.find('img')
         
-        if img_soup and 'src' in img_soup.attrs:
-            img = img_soup.attrs['src']
+        if img_soup and 'data-src' in img_soup.attrs:
+            img = img_soup.attrs['data-src']
         else:
             img = 'no_image'
         data = {
@@ -30,3 +30,10 @@ def getHotNews():
     return result
 
 
+def getDetail(link):
+    r = requests.get(link)
+    soupDetail = BeautifulSoup(r.text, 'html.parser')
+    article_content = soupDetail.select_one('div[class="item-post-inner flex-col"]')
+    if article_content == None:
+        return None
+    article_paragraph_list = article_content.find_all('p')
