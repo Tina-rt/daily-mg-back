@@ -19,6 +19,7 @@ def getHotNews():
         else:
             img = 'no_image'
         data = {
+            'journal_id': 2,
             'title': title,
             'link': link,
             'img': img,
@@ -26,7 +27,7 @@ def getHotNews():
         result.append(data)
     return result
 
-def getDetails(link):
+def getDetail(link):
     r = requests.get(link)
     soupDetail = BeautifulSoup(r.text, 'html.parser')
     article_content = soupDetail.select_one('article')
@@ -34,5 +35,3 @@ def getDetails(link):
     
     article_paragraph_txt = [p.text for p in article_paragraph_list]
     return article_paragraph_txt
-
-print(getDetails('https://www.lefigaro.fr/international/donetsk-marioupol-lougansk-voyage-dans-le-donbass-sous-tutelle-russe-20240518'))
