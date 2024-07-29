@@ -11,7 +11,9 @@ def getHotNews():
     soup = BeautifulSoup(r.text, 'html.parser')
     articles = soup.select('.fig-ranking-profile-container')
     result = []
+    i = 0
     for article in articles:
+        i += 1
         article_soup = BeautifulSoup(str(article), 'html.parser')
         title = article_soup.find('h2').text
         link = article_soup.find('a').attrs['href']
@@ -24,7 +26,8 @@ def getHotNews():
         else:
             img = 'https://logowik.com/content/uploads/images/lefigaro1727.logowik.com.webp'
         data = {
-            'journal_id': 2,
+            'id': 'figaro' + str(i),
+            'journalId': 2,
             'journal': 'Le figaro',
             'title': title,
             'link': link,
