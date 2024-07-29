@@ -4,7 +4,10 @@ import requests
 JOURNAL_URL = 'https://www.lefigaro.fr/international'
 
 def getHotNews():
-    r = requests.get(JOURNAL_URL)
+    try:
+        r = requests.get(JOURNAL_URL)
+    except:
+        return []
     soup = BeautifulSoup(r.text, 'html.parser')
     articles = soup.select('.fig-ranking-profile-container')
     result = []
@@ -16,10 +19,13 @@ def getHotNews():
         
         if img_soup and 'srcset' in img_soup.attrs:
             img = img_soup.attrs['srcset']
+            img = img.split(',')[0]
+            img = img[:len(img)-5]
         else:
-            img = 'no_image'
+            img = 'https://logowik.com/content/uploads/images/lefigaro1727.logowik.com.webp'
         data = {
             'journal_id': 2,
+            'journal': 'Le figaro',
             'title': title,
             'link': link,
             'img': img,

@@ -15,4 +15,4 @@ api.add_resource(DetailJournal, '/detail')
 api.add_resource(InternationalNews, '/international')
 
 if __name__ == '__main__':
-    app.run(debug=False)
+    app.run(debug=True)

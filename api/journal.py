@@ -2,6 +2,7 @@ from flask_restful import Resource
 from scraper import midimdgscraper, expressmadascraper, lemondescraper, lefigaroscraper
 from flask import request
 from api.constants import JOURNAL_LIST
+import random
 
 class HotNews(Resource):
     def get(self):
@@ -19,4 +20,13 @@ class DetailJournal(Resource):
 
 class InternationalNews(Resource):
     def get(self):
-        return lefigaroscraper.getHotNews()
+        lefigaro_list = lefigaroscraper.getHotNews()
+        lemonde_list = lemondescraper.getHotNews()
+        shuffled = [*lefigaro_list[2:], *lemonde_list[2:]]
+        random.shuffle(shuffled)
+        return [lefigaro_list[0], lemonde_list[0], lefigaro_list[1], lemonde_list[1],*shuffled ]
+    
+    # def _shuffle(self, *args):
+    #     new_list = []
+    #     for i in range(len(args)):
+    #         new_list.append(args[i])
