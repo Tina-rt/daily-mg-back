@@ -13,8 +13,9 @@ api = Api(app)
 CORS(app, resources={r"/*": {"origins": "*"}})
 
 
-api.add_resource(HotNews, '/')
-api.add_resource(DetailJournal, '/detail')
+api.add_resource(AllNews, '/')
+api.add_resource(LocalNews, '/local')
+api.add_resource(DetailJournal, '/detail/<int:id>')
 api.add_resource(InternationalNews, '/international')
 api.add_resource(Olympics, '/olympics')
 api.add_resource(DbHandler, '/updateDb')

@@ -6,3 +6,5 @@ JOURNAL_LIST = {
     '2': lefigaroscraper,
     '3': lemondescraper,
 }
+
+CAN_FETCH_DETAILS = [0,1]

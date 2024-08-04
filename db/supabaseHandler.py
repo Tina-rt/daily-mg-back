@@ -30,3 +30,7 @@ def updateStatus():
         res = supabase.table("Status").insert({"last_update": str(datetime.now())}).execute()
         return res
     return
+
+def getDetails(id):
+    response = (supabase.table("Headlines").select("*").eq("id", id).execute())
+    return response.data

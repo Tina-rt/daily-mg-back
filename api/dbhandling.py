@@ -17,6 +17,4 @@ class InsertDb(Resource):
             return {'msg': 'International Headlines inserted'}
         else:
             return {'msg': 'Invalid category'}
-            
-    
-    
+        
