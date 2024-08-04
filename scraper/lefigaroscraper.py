@@ -26,13 +26,14 @@ def getHotNews():
         else:
             img = 'https://logowik.com/content/uploads/images/lefigaro1727.logowik.com.webp'
         data = {
-            'id': 'figaro' + str(i),
-            'journalId': 2,
-            'journal': 'Le figaro',
+            'publisher_id': 3,
             'title': title,
             'link': link,
             'img': img,
+            'category': 2
         }
+        if data['link'] in map(lambda x: x['link'], result):
+            continue
         result.append(data)
     return result
 

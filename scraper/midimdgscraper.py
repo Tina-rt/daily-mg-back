@@ -29,13 +29,12 @@ def getHotNews():
         else:
             img = img_soup.attrs['data-img-url']
         result.append({
-            'id': 'midi' + str(i),
-            'journalId': 1,
-            'journal': 'Midi Madagasikara',
+            'publisher_id': 2,
             'title': title,
             'link': link,
             'img': img,
-            'date': date
+            'published_at': date,
+            'category': 1
         })
     return result
 

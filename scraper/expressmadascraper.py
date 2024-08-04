@@ -21,14 +21,14 @@ def getHotNews() -> list:
             if date_soup != None: date = date_soup.attrs['datetime'] 
             detail = article_soup.find('p').text
             result.append({
-                'id': 'lexpress' + str(i),
-                'journal': 'L\'Express de Madagascar',
-                'journalId': 0,
+                'publisher_id': 1,
                 'title': title,
                 'link': link,
                 'img': img,
                 'detail': detail,
-                'date': date
+                'published_at': date,
+                'category': 1
+                
             })
         except: 
             pass
