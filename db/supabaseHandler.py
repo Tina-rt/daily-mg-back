@@ -10,11 +10,11 @@ def insertHeadlines(data):
     
     return response
 
-def getHeadlines(category=None):
+def getHeadlines(category=None, limit=20):
     if category:
-        response = (supabase.table("Headlines").select("*").eq("category", category).execute())
+        response = (supabase.table("Headlines").select("*, publisher(id,name)").eq("category", category).order("created_at", desc=True).limit(limit).execute())
     else:
-        response = (supabase.table("Headlines").select("*").execute())
+        response = (supabase.table("Headlines").select("*, publisher(id,name)").execute())
     return response
 
 
@@ -31,5 +31,5 @@ def updateStatus():
     return
 
 def getDetails(id):
-    response = (supabase.table("Headlines").select("*").eq("id", id).execute())
+    response = (supabase.table("Headlines").select("*, publisher(id,name)").eq("id", id).execute())
     return response.data

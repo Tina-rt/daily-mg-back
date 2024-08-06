@@ -24,14 +24,16 @@ class DetailJournal(Resource):
         print(data)
         if len(data) > 0:
             current_headlines = data[0]
-            if current_headlines['publisher_id'] == 2:
-                return midimdgscraper.getDetail(current_headlines['link'])
-            elif current_headlines['publisher_id'] == 1:
-                print(current_headlines['link'])
-                return expressmadascraper.getDetail(current_headlines['link'])
+            result = {}
+            if current_headlines['publisher']['id'] == 2:
+                result = midimdgscraper.getDetail(current_headlines['link'])
+            elif current_headlines['publisher']['id'] == 1:
+                result = expressmadascraper.getDetail(current_headlines['link'])
             else:
-                return []
-        return []        
+                return {}
+            result['title'] = current_headlines['title']
+            return result
+        return {}    
 
 
 class InternationalNews(Resource):
