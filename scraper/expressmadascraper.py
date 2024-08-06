@@ -40,6 +40,7 @@ def getDetail(link):
     r = requests.get(link)
     soupDetail = BeautifulSoup(r.text, 'html.parser')
     article_content = soupDetail.select_one('div[class="item-post-inner flex-col"]')
+    # print("ARticle content", soupDetail)
     if article_content == None:
         return None
     article_paragraph_list = article_content.find_all('p')

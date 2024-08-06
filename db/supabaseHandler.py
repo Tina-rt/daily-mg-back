@@ -3,7 +3,6 @@ from supabase import create_client, client
 from datetime import datetime
 url:str = os.environ.get("SUPABASE_URL")
 key:str = os.environ.get("SUPABASE_KEY")
-print(key)
 supabase = create_client(url, key)
 
 def insertHeadlines(data):

@@ -21,11 +21,13 @@ class DetailJournal(Resource):
     def get(self, id):
        
         data = getDetails(id)
+        print(data)
         if len(data) > 0:
             current_headlines = data[0]
-            if current_headlines['publisher_id'] == 1:
+            if current_headlines['publisher_id'] == 2:
                 return midimdgscraper.getDetail(current_headlines['link'])
-            elif current_headlines['publisher_id'] == 2:
+            elif current_headlines['publisher_id'] == 1:
+                print(current_headlines['link'])
                 return expressmadascraper.getDetail(current_headlines['link'])
             else:
                 return []
