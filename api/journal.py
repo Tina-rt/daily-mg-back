@@ -10,7 +10,7 @@ from db.supabaseHandler import *
 class AllNews(Resource):
     def get(self):
         data = getHeadlines()
-        return data.data
+        return data
 
 class LocalNews(Resource):
     def get(self):
@@ -39,7 +39,7 @@ class DetailJournal(Resource):
 class InternationalNews(Resource):
     def get(self):
         data = getHeadlines(2)
-        return data.data
+        return data
     # def _shuffle(self, *args):
     #     new_list = []
     #     for i in range(len(args)):
