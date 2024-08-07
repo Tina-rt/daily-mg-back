@@ -5,6 +5,7 @@ from scraper import expressmadascraper
 from api.journal import *
 from api.olympics import *
 from api.dbhandling import *
+from api.test import Test
 from db.scraperService import *
 
 
@@ -20,7 +21,7 @@ api.add_resource(InternationalNews, '/international')
 api.add_resource(Olympics, '/olympics')
 api.add_resource(DbHandler, '/updateDb')
 api.add_resource(InsertDb, '/updateDb/<int:category>')
-
+api.add_resource(Test, '/test')
 
 if __name__ == '__main__':
     app.run(debug=False)
