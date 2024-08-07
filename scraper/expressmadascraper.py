@@ -21,13 +21,14 @@ def getHotNews() -> list:
             if date_soup != None: date = date_soup.attrs['datetime'] 
             detail = article_soup.find('p').text
             result.append({
-                'publisher_id': 1,
+                'publisher': 1,
                 'title': title,
                 'link': link,
                 'img': img,
                 'detail': detail,
                 'published_at': date,
-                'category': 1
+                'category': 1,
+                'isTop': False
                 
             })
         except: 

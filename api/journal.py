@@ -15,7 +15,7 @@ class AllNews(Resource):
 class LocalNews(Resource):
     def get(self):
         data = getHeadlines(1)
-        return data.data
+        return data
 
 class DetailJournal(Resource):
     def get(self, id):

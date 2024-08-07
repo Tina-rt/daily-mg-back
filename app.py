@@ -23,4 +23,4 @@ api.add_resource(InsertDb, '/updateDb/<int:category>')
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)
