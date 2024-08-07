@@ -29,12 +29,13 @@ def getHotNews():
         else:
             img = img_soup.attrs['data-img-url']
         result.append({
-            'publisher_id': 2,
+            'publisher': 2,
             'title': title,
             'link': link,
             'img': img,
             'published_at': date,
-            'category': 1
+            'category': 1,
+            'isTop': False
         })
     return result
 
