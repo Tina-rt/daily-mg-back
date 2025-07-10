@@ -1,9 +1,14 @@
 from bs4 import BeautifulSoup
 import requests
+from utils.journal_crud import *
+import uuid
+from threading import Thread
+import datetime
 
 JOURNAL_URL = 'https://midi-madagasikara.mg/'
 
 def getHotNews(): 
+    print("Scraping midi madagascar")
     r = requests.get(JOURNAL_URL)
     soup = BeautifulSoup(r.text, 'html.parser')
     articles = soup.find_all(class_='td-module-container')
@@ -28,15 +33,22 @@ def getHotNews():
             continue
         else:
             img = img_soup.attrs['data-img-url']
-        result.append({
-            'id': 'midi' + str(i),
-            'journalId': 1,
+        journal = {
+            'id': 'midi-'+str(uuid.uuid4()),
             'journal': 'Midi Madagasikara',
+            'created_at': datetime.datetime.now(tz=datetime.timezone.utc),
+            'detail': '',
+
             'title': title,
             'link': link,
             'img': img,
-            'date': date
-        })
+            'published_at': date,
+            'publisher': {
+                'id': 1,
+                'name': 'Midi Madagasikara'
+            }
+        }
+        result.append(journal)
     return result
 
 def getDetail(link):

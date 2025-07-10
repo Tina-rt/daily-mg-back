@@ -3,10 +3,11 @@ from scraper import midimdgscraper, expressmadascraper, lemondescraper, lefigaro
 from flask import request
 from api.constants import JOURNAL_LIST
 import random
+from utils.journal_crud import *
 
 class HotNews(Resource):
     def get(self):
-        return midimdgscraper.getHotNews()+ expressmadascraper.getHotNews()
+        return get_all_journal()
 
 class DetailJournal(Resource):
     def get(self):

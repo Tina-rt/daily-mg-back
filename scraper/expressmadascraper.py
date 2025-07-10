@@ -1,11 +1,13 @@
 from bs4 import BeautifulSoup
-import requests
+import requests, uuid, datetime
 
 JOURNAL_URL = 'https://www.lexpress.mg/'
 def getHotNews() -> list:
+    print("Scraping express de madagascar", JOURNAL_URL)
     r = requests.get(JOURNAL_URL)
     soup = BeautifulSoup(r.text, 'html.parser')
     articles = soup.find_all('article')
+    print("Express: article found", len(articles))
     result = []
     i = 0
     # print(articles)
@@ -21,14 +23,17 @@ def getHotNews() -> list:
             if date_soup != None: date = date_soup.attrs['datetime'] 
             detail = article_soup.find('p').text
             result.append({
-                'id': 'lexpress' + str(i),
-                'journal': 'L\'Express de Madagascar',
-                'journalId': 0,
+                'id': 'midi-'+str(uuid.uuid4()),
+                'publisher': {
+                    'id': 2,
+                    'name': 'L\'Express de Madagascar'
+                },
                 'title': title,
+                'created_at': datetime.datetime.now(tz=datetime.timezone.utc),
                 'link': link,
                 'img': img,
                 'detail': detail,
-                'date': date
+                'published_at': date
             })
         except: 
             pass
