@@ -28,6 +28,6 @@ def article_exists(journal_link: str):
     return j is not None
 
 def get_all_journal():
-    all_j = collection.find().limit(20)
+    all_j = collection.find().sort({'created_at', -1}).limit(20)
     
     return json.loads(dumps(all_j))
