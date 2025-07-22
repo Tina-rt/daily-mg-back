@@ -3,13 +3,17 @@ from threading import Thread
 
 from scraper import midimdgscraper, expressmadascraper
 from utils.journal_crud import *
+from utils.aiSorting import sortNews
 
 
 def launch():
     print("Launching scraping")
     all_journal = midimdgscraper.getHotNews()+ expressmadascraper.getHotNews()
-    print("Inserting data", len(all_journal))
-    add_journals(all_journal)
+    print(all_journal)
+    journals = sortNews(all_journal)
+    print("Sorted journal",journals)
+    print("Inserting data", len(journals))
+    add_journals(journals)
     print("Launching scraped finished")
 
 
