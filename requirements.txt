@@ -22,3 +22,5 @@ soupsieve==2.5
 urllib3==2.2.2
 Werkzeug==3.0.3
 pymongo
+google-genai
+dotenv
