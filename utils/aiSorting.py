@@ -16,7 +16,7 @@ def sortNews(news: list):
     print("sorting news using gemini ...")
     news_for_ai = [{'id': n['id'], 'title': n['title']} for n in news]
     contents = f'''
-    Sort these news by pertinence
+    Sort these news by less important news to the most important
     {news_for_ai}
 '''
     response = client.models.generate_content(
