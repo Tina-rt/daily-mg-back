@@ -1,10 +1,24 @@
+from enum import Enum
 from google import genai
 import dotenv, os, sys, time
 from pydantic import BaseModel
 
+class TopicEnum(Enum):
+    POLITICS = "politics"
+    SPORT = "sport"
+    ECONOMY = "economy"
+    INTERNATIONAL = "international"
+    CULTURE = "culture"
+    TECHNOLOGY = "technology"
+    HEALTH = "health"
+    EDUCATION = "education"
+    ENTERTAINMENT = "entertainment"
+    OTHER = "other"
+
 class News(BaseModel):
     id: str
     title: str
+    topic: TopicEnum
 
 dotenv.load_dotenv()
 
@@ -16,7 +30,7 @@ def sortNews(news: list):
     print("sorting news using gemini ...")
     news_for_ai = [{'id': n['id'], 'title': n['title']} for n in news]
     contents = f'''
-    Sort these news by less important news to the most important
+    Sort these news by less important news to the most important and give each news a topic
     {news_for_ai}
 '''
     response = client.models.generate_content(
@@ -32,5 +46,6 @@ def sortNews(news: list):
         for full_new in news:
             if full_new['id'] == sorted_journal.id:
                 full_new['created_at_tm'] = time.time()
+                full_new['topic'] = sorted_journal.topic.value
                 rslt.append(full_new)
     return rslt

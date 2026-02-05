@@ -22,6 +22,9 @@ def getHotNews() -> list:
             date = ''
             if date_soup != None: date = date_soup.attrs['datetime'] 
             detail = article_soup.find('p').text
+            if article_exists(link): 
+                print("Article already exists", link)
+                continue
             result.append({
                 'id': 'midi-'+str(uuid.uuid4()),
                 'publisher': {
@@ -31,15 +34,24 @@ def getHotNews() -> list:
                 'title': title,
                 'created_at': datetime.datetime.now(tz=datetime.timezone.utc),
                 'link': link,
-                'img': img,
+                'img': getHighResImage(link) or img,
                 'detail': detail,
-                'published_at': date
+                'published_at': date,
+                'category': 'local'
             })
         except: 
             pass
         # print(article.a)
         # pass
     return result
+
+
+def getHighResImage(link):
+    try:
+        detailled_article = getDetail(link)
+        return detailled_article['img']
+    except:
+        return None
 
 def getDetail(link):
     r = requests.get(link)
@@ -59,3 +71,7 @@ def getDetail(link):
         'img': article_img,
         'date': date_
     }
+
+
+if __name__ == '__main__':
+    print(getHotNews())

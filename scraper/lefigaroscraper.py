@@ -29,10 +29,12 @@ def getHotNews():
             'id': 'figaro' + str(i),
             'journalId': 2,
             'journal': 'Le figaro',
+            'category': 'international',
             'title': title,
             'link': link,
             'img': img,
         }
+        if article_exists(link): continue
         result.append(data)
     return result
 

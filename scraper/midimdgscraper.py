@@ -46,8 +46,10 @@ def getHotNews():
             'publisher': {
                 'id': 1,
                 'name': 'Midi Madagasikara'
-            }
+            },
+            'category': 'local'
         }
+        if article_exists(link): continue
         result.append(journal)
     return result
 

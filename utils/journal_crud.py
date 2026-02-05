@@ -1,16 +1,26 @@
 from pymongo import MongoClient, DESCENDING
 from bson.json_util import dumps
 import json
+from dotenv import load_dotenv
+import os
+load_dotenv()
 
-client = MongoClient("mongodb://tina:tinatina21@172.245.54.65:27017/?authSource=admin")
+client = MongoClient(os.getenv("MONGO_URI"))
 
 db = client['dailymg']
-collection = db['journals']
+collection = db['articles']
 
-try:
-    collection.create_index('link', unique=True)
-except Exception as e:
-    print("Creating unique index failed", e)
+# Check if index exists before creating
+indexes = collection.index_information()
+index_exists = any(info['key'] == [('link', 1)] for info in indexes.values())
+
+if not index_exists:
+    try:
+        collection.create_index('link', unique=True)
+    except Exception as e:
+        print("Creating unique index failed", e)
+else:
+    print("Index on 'link' already exists.")
 
 def add_journals(journal_data: list):
     for journal in journal_data:

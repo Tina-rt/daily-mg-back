@@ -1,14 +1,14 @@
 from flask_restful import Resource
 from threading import Thread
 
-from scraper import midimdgscraper, expressmadascraper
+from scraper import midimdgscraper, expressmadascraper, lemondescraper
 from utils.journal_crud import *
 from utils.aiSorting import sortNews
 
 
 def launch():
     print("Launching scraping")
-    all_journal = midimdgscraper.getHotNews()+ expressmadascraper.getHotNews()
+    all_journal = midimdgscraper.getHotNews()+ expressmadascraper.getHotNews() + lemondescraper.getHotNews()
     print(all_journal)
     journals = sortNews(all_journal)
     print("Sorted journal",journals)
