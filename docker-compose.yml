@@ -1,0 +1,16 @@
+services:
+  api:
+    build: .
+    container_name: daily-mg-back
+    ports:
+      - "5000:5000"
+    env_file:
+      - .env
+    restart: always
+    volumes:
+      - .:/app
+    environment:
+      - FLASK_ENV=development
+      - FLASK_DEBUG=1
+    # Overriding the CMD to use flask run with reload for development
+    command: python app.py
