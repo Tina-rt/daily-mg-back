@@ -30,7 +30,8 @@ def sortNews(news: list):
     print("sorting news using gemini ...")
     news_for_ai = [{'id': n['id'], 'title': n['title']} for n in news]
     contents = f'''
-    Sort these news by less important news to the most important and give each news a topic
+    Sort these news by less important news to the most important and give each news a topic.
+    Analyze the title and do not repeat similar news. If you find similar news, remove the less important one.
     {news_for_ai}
 '''
     response = client.models.generate_content(

@@ -1,5 +1,7 @@
 from bs4 import BeautifulSoup
 import requests
+from utils.journal_crud import article_exists
+from utils.image_scraper import get_image as get_image_from_bing
 
 JOURNAL_URL = 'https://www.lefigaro.fr/international'
 
@@ -18,13 +20,14 @@ def getHotNews():
         title = article_soup.find('h2').text
         link = article_soup.find('a').attrs['href']
         img_soup = article_soup.find('img')
+        if article_exists(link): continue
         
         if img_soup and 'srcset' in img_soup.attrs:
             img = img_soup.attrs['srcset']
             img = img.split(',')[0]
             img = img[:len(img)-5]
         else:
-            img = 'https://logowik.com/content/uploads/images/lefigaro1727.logowik.com.webp'
+            img = get_image_from_bing(title) or 'https://logowik.com/content/uploads/images/lefigaro1727.logowik.com.webp'
         data = {
             'id': 'figaro' + str(i),
             'journalId': 2,
@@ -34,7 +37,6 @@ def getHotNews():
             'link': link,
             'img': img,
         }
-        if article_exists(link): continue
         result.append(data)
     return result
 
