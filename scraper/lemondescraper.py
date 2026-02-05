@@ -19,7 +19,9 @@ def getHotNews():
         title = article_soup.find('h3').text
         link = article.attrs['href']
         img_soup = article_soup.find('img')
-        
+        if article_exists(link): 
+            print("Article already exists", link)
+            continue
         if img_soup and 'data-src' in img_soup.attrs:
             img = img_soup.attrs['data-src']
         else:
@@ -34,9 +36,7 @@ def getHotNews():
             'img': img,
         }
         # print(data)
-        if article_exists(link): 
-            print("Article already exists", link)
-            continue
+        
         result.append(data)
 
     # other_articls_soup = soup.select('.teaser--normal')
