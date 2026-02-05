@@ -64,7 +64,7 @@ def getDetail(link):
 
     try:img_url = article_content.find('img').attrs['src']
     except: img_url = 'no_image'
-    print(all_paragraph)
+    # print(all_paragraph)
     
     return {
         'date': date,

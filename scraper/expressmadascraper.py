@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 import requests, uuid, datetime
+from utils.journal_crud import article_exists
 
 JOURNAL_URL = 'https://www.lexpress.mg/'
 def getHotNews() -> list:
@@ -39,8 +40,8 @@ def getHotNews() -> list:
                 'published_at': date,
                 'category': 'local'
             })
-        except: 
-            pass
+        except Exception as e: 
+            print(e)
         # print(article.a)
         # pass
     return result
