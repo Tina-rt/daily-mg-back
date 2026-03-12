@@ -49,6 +49,7 @@ def sortNews(news: list):
             if full_new['id'] == sorted_journal.id:
                 full_new['created_at_tm'] = time.time()
                 full_new['topic'] = sorted_journal.topic.value
+                full_new['pertinence'] = sorted_journal.pertinence
                 rslt.append(full_new)
     print("Finish sorting news. Total: ", len(rslt))
     return rslt
