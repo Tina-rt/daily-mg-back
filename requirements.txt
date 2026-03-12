@@ -24,3 +24,4 @@ Werkzeug==3.0.3
 pymongo
 google-genai
 dotenv
+dateparser

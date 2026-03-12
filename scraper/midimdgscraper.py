@@ -12,6 +12,7 @@ def getHotNews():
     r = requests.get(JOURNAL_URL)
     soup = BeautifulSoup(r.text, 'html.parser')
     articles = soup.find_all(class_='td-module-container')
+    print("Total articles", articles)
     result = []
     i = 0
     for article in articles:
@@ -51,6 +52,7 @@ def getHotNews():
         }
         if article_exists(link): continue
         result.append(journal)
+    print("Total Midi news", len(result))
     return result
 
 def getDetail(link):

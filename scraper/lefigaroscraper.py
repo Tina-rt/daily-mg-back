@@ -1,3 +1,4 @@
+from datetime import datetime
 from bs4 import BeautifulSoup
 import requests
 from utils.journal_crud import article_exists
@@ -17,9 +18,12 @@ def getHotNews():
     for article in articles:
         i += 1
         article_soup = BeautifulSoup(str(article), 'html.parser')
-        title = article_soup.find('h2').text
-        link = article_soup.find('a').attrs['href']
-        img_soup = article_soup.find('img')
+        try:
+            title = article_soup.find('h2').text
+            link = article_soup.find('a').attrs['href']
+            img_soup = article_soup.find('img')
+        except:
+            continue
         if article_exists(link): continue
         
         if img_soup and 'srcset' in img_soup.attrs:
@@ -33,6 +37,7 @@ def getHotNews():
             'journalId': 2,
             'journal': 'Le figaro',
             'category': 'international',
+            'published_at': datetime.now(),
             'title': title,
             'link': link,
             'img': img,

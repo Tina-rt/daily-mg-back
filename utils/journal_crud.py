@@ -31,6 +31,7 @@ def add_journals(journal_data: list):
             print("Journal insertion done")
         except Exception as e:
             print("Inserting failed", e)
+    print("Finish inserting journal. Total: ", len(journal_data))
 
 
 def article_exists(journal_link: str):

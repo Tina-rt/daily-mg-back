@@ -1,3 +1,4 @@
+from datetime import datetime
 from bs4 import BeautifulSoup
 import requests
 from utils.journal_crud import article_exists
@@ -31,6 +32,7 @@ def getHotNews():
             'journalId': 3,
             'journal': 'Le Monde',
             'category': 'international',
+            'published_at': datetime.now(),
             'title': title,
             'link': link,
             'img': img,

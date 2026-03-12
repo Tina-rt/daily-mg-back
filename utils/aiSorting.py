@@ -19,6 +19,7 @@ class News(BaseModel):
     id: str
     title: str
     topic: TopicEnum
+    pertinence: int
 
 dotenv.load_dotenv()
 
@@ -30,7 +31,7 @@ def sortNews(news: list):
     print("sorting news using gemini ...")
     news_for_ai = [{'id': n['id'], 'title': n['title']} for n in news]
     contents = f'''
-    Sort these news by less important news to the most important and give each news a topic.
+    Sort these news by less important news to the most important (Give pertinence score from 1 to 10) and give each news a topic.
     Analyze the title and do not repeat similar news. If you find similar news, remove the less important one.
     {news_for_ai}
 '''
@@ -49,4 +50,5 @@ def sortNews(news: list):
                 full_new['created_at_tm'] = time.time()
                 full_new['topic'] = sorted_journal.topic.value
                 rslt.append(full_new)
+    print("Finish sorting news. Total: ", len(rslt))
     return rslt

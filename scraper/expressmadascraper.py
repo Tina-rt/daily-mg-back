@@ -27,7 +27,7 @@ def getHotNews() -> list:
                 print("Article already exists", link)
                 continue
             result.append({
-                'id': 'midi-'+str(uuid.uuid4()),
+                'id': 'express-'+str(uuid.uuid4()),
                 'publisher': {
                     'id': 2,
                     'name': 'L\'Express de Madagascar'
